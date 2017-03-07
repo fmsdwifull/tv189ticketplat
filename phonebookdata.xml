@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phonebook>
+    <!--one item behalfs one contacted person.-->
+    <item>
+        <name>miaomaio</name>
+        <addr>Shaanxi Xi&apos;an</addr>
+        <tel>13759911917</tel>
+        <email>miaomiao@home.com</email>
+    </item>
+    <item>
+        <name>gougou</name>
+        <addr>Liaoning Shenyang</addr>
+        <tel>15840330481</tel>
+        <email>gougou@home.com</email>
+    </item>
+    <!--more contacted persons.-->
+    <item>
+        <name>pipi</name>
+        <addr>Shaanxi Xianyang</addr>
+        <tel>02937310627</tel>
+        <email>pipi@home.com</email>
+    </item>
+    <item>
+        <name>pipi</name>
+        <addr>Shaanxi Xianyang</addr>
+        <tel>02937310627</tel>
+        <email>pipi@home.com</email>
+    </item>
+    <item>
+        <name>pipi</name>
+        <addr>Shaanxi Xianyang</addr>
+        <tel>02937310627</tel>
+        <email>pipi@home.com</email>
+    </item>
+</phonebook>

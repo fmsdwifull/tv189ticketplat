@@ -1,0 +1,19 @@
+<report>
+    <mediaserver>
+        <ip>2000</ip>
+        <status>2</status>
+    </mediaserver>
+    <mediaserver>
+        <ip>3</ip>
+        <status>4</status>
+    </mediaserver>
+    <logserver>
+        <ip>7</ip>
+        <status>5</status>
+        <workqueue>6</workqueue>
+    </logserver>
+    <lastuploadtime>20140102233415</lastuploadtime>
+    <!--年月日时分秒-->
+    <lastprocesstime>20140102233915</lastprocesstime>
+    <nextuploadtime>20140102235423</nextuploadtime>
+</report>

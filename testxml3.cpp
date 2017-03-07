@@ -1,0 +1,249 @@
+#include <iostream>
+#include "tinyxml.h"
+#include "tinystr.h"
+#include <string>
+using namespace std;
+/*
+<?xml version="1.0" encoding="UTF-8"?>
+<phonebook>
+    <!--one item behalfs one contacted person.-->
+    <item>
+    	<name>miaomaio</name>
+	<addr>Shaanxi Xi'an</addr>
+	<tel>13759911917</tel>
+	<email>miaomiao@home.com</email>
+    </item>
+    <item>
+    	<name>gougou</name>
+	<addr>Liaoning Shenyang</addr>
+	<tel>15840330481</tel>
+	<email>gougou@home.com</email>
+    </item>
+    <!--more contacted persons.-->
+</phonebook>
+
+
+TiXmlDeclaration指的就是<?xml version="1.0" encoding="UTF-8"?>，
+TiXmlComment指的就是<!--one item behalfs one contacted person.-->、 <!--more contacted persons.-->，
+TiXmlDocument指的就是整个xml文档，
+TiXmlElement指的就是<phonebook>、<item>、<name>、<addr>等等这些节点，
+TiXmlText指的就是‘gougou’、‘15840330481’这些夹在<item>与</item>、<name>与</name>、<addr>与</addr>之间的文本文字，
+TiXmlAttribute指的就是<?xml version="1.0" encoding="UTF-8"?>节点中version、encoding，
+除此之外就是TiXmlUnknown。
+*/
+
+/*
+
+*/
+
+void insertmedia_nd(TiXmlElement* fromnode,char *popnodename,char *value1,char *value2,char *value3,char *value4)
+{
+	TiXmlNode*	  newNode = new TiXmlElement(popnodename);
+	const TiXmlNode* name4NewNode = new TiXmlElement("ip");
+	newNode->InsertEndChild(*name4NewNode)->InsertEndChild(TiXmlText(value1));
+
+	const TiXmlNode* addr4NewNode = new TiXmlElement("status");
+	newNode->InsertEndChild(*addr4NewNode)->InsertEndChild(TiXmlText(value2));
+
+	fromnode->InsertEndChild(*newNode);
+}
+
+void insertlog_nd(TiXmlElement* fromnode,char *popnodename,char *value1,char *value2,char *value3,char *value4)
+{
+	TiXmlNode*	  newNode = new TiXmlElement(popnodename);
+	const TiXmlNode* name4NewNode = new TiXmlElement("ip");
+	newNode->InsertEndChild(*name4NewNode)->InsertEndChild(TiXmlText(value1));
+
+	const TiXmlNode* addr4NewNode = new TiXmlElement("status");
+	newNode->InsertEndChild(*addr4NewNode)->InsertEndChild(TiXmlText(value2));
+
+	const TiXmlNode* tel4NewNode = new TiXmlElement("workqueue");
+	newNode->InsertEndChild(*tel4NewNode)->InsertEndChild(TiXmlText(value3));
+	fromnode->InsertEndChild(*newNode);
+}
+
+
+void insertsig_nd(TiXmlElement* fromnode,char *popnodename,char *value)
+{
+	//TiXmlNode* fathernode=fromnode->FirstChild();
+	
+	const TiXmlNode* newNode = new TiXmlElement(popnodename);
+	fromnode->InsertEndChild(*newNode)->InsertEndChild(TiXmlText(value));
+	
+	//fromnode->InsertEndChild(*newNode);
+}
+
+
+
+
+int main()
+{
+	//创建一个XML的文档对象
+	const char* filepath = "report3.xml";
+	TiXmlDocument doc(filepath);
+	bool loadOk = doc.LoadFile();	
+	if (!loadOk) {	
+		printf( "Could not load test file \n");
+		return -1;
+	}
+	
+	TiXmlHandle docHandle(&doc);
+	//TiXmlNode docHandle(&doc);
+	//获得根元素
+	TiXmlElement* root = doc.RootElement();
+#if 0
+
+	//查找元素
+    cout << "RootElement value=" << root->Value() << endl; 
+	TiXmlNode* item=root->FirstChild("mediaserver");
+	const char *ip=item->FirstChild("ip")->ToElement()->GetText();
+	printf("xxxxxxxxxxxxxxxxxxxxxxxx:%s\n",ip);
+	const char *status=item->FirstChild("status")->ToElement()->GetText();
+	printf("xxxxxxxxxxxxxxxxxxxxxxxx:%s\n",status);
+	item=item->NextSibling("mediaserver");
+
+	//item->FirstChild("ip")->ToElement()->ReplaceChild(item,"100000000000");
+
+	ip=item->FirstChild("ip")->ToElement()->GetText();
+	printf("xxxxxxxxxxxxxxxxxxxxxxxx:%s\n",ip);
+	status=item->FirstChild("status")->ToElement()->GetText();
+	printf("xxxxxxxxxxxxxxxxxxxxxxxx:%s\n",status);
+
+
+	//修改元素
+	TiXmlElement* _ip=NULL;
+	_ip = docHandle.FirstChild("report").FirstChild("mediaserver").FirstChild("ip").ToElement();
+	if (_ip == NULL)
+	{
+		printf("xxxxxxxxxxxxxxxxxxxxxxxx\n");
+	}
+	TiXmlNode* oldnode = _ip->FirstChild();
+	TiXmlText newText("2000");
+	_ip->ReplaceChild(oldnode, newText);
+	doc.SaveFile(); 
+
+	void updatenode()
+#endif
+	
+#if 0
+	printf("------------------------------------\n\n");
+	// 遍历根下每个节点
+	for( TiXmlNode*  item = root->FirstChild( "item" );	item;
+		item = item->NextSibling( "item" ) ) // nextsibling 下一个兄弟
+	{
+		// read name.
+		TiXmlNode* child = item->FirstChild();
+		const char* name = child->ToElement()->GetText();
+		if (name) {
+			printf("name:%s\n",name);
+		} else {
+			printf("name:\n");
+		}
+
+		// read address.
+		child = item->IterateChildren(child);
+		const char* addr = child->ToElement()->GetText();
+		if (addr) {
+			printf("addr:%s\n",addr);
+		} else {
+			printf("addr:\n");
+		}
+
+		// read telephone no.
+		child = item->IterateChildren(child);
+		const char* tel = child->ToElement()->GetText();
+     	if (tel) {
+			printf("tel:%s\n",tel);
+		} else {
+			printf("tel:\n");
+		}
+
+		// read e-mail.
+		child = item->IterateChildren(child);
+		const char* email = child->ToElement()->GetText();
+		if(email) {
+			printf("email:%s\n",email);
+		} else {
+			printf("email:\n");
+		}
+		
+		printf("-------\n");
+	
+	}
+	printf("---------------------------------------------\n");
+	
+
+
+	TiXmlElement *FirstPerson = root->FirstChildElement();
+	cout << "FirstPerson value=" << FirstPerson->Value() << endl;
+	
+	TiXmlElement *NameElement = FirstPerson->FirstChildElement();  
+    TiXmlElement *AddrElement = NameElement->NextSiblingElement();  
+    TiXmlAttribute *IDAttribute = FirstPerson->FirstAttribute(); //获取ID属性
+
+	
+	printf("xxxxxxxxxxxxxxxxxxxx--0\n");
+	cout << NameElement->FirstChild()->Value() << endl;  
+    cout << AddrElement->FirstChild()->Value() << endl;  
+    //cout << IDAttribute->Value() << endl; 
+
+#endif
+
+
+	
+	TiXmlElement* writeRoot = doc.RootElement();
+
+
+	//TiXmlNode* node = writeRoot->FirstChild("mediainfo");
+   	//writeRoot->RemoveChild(node);
+
+
+
+	for( TiXmlNode*  node = root->FirstChild( "mediainfo" );node;node = node->NextSibling( "mediainfo" ) ) // nextsibling 下一个兄弟
+	{
+		writeRoot->RemoveChild(node);
+	}
+
+
+
+
+	//insertmedia_nd(writeRoot,"mediainfo","nimei","shanghai","12343456","xxxxxxxx@22222222");
+	//insertmedia_nd(writeRoot,"mediainfo","nimei","shanghai","12343456","xxxxxxxx@22222222");
+	//insertmedia_nd(writeRoot,"mediainfo","nimei","shanghai","12343456","xxxxxxxx@22222222");
+	
+	insertsig_nd(writeRoot,"country","china");
+
+	insertlog_nd(writeRoot,"loginfo","nimei2","shanghai2","123434561","xxxxxxxx@44444");
+
+
+
+
+#if 0
+
+	// xml中增加文件 并写文件
+	TiXmlElement* writeRoot = doc.RootElement();
+
+	for(int i=0;i<4;i++)
+	{
+	TiXmlNode*    newNode = new TiXmlElement("item");
+	
+    const TiXmlNode* name4NewNode = new TiXmlElement("name");
+	newNode->InsertEndChild(*name4NewNode)->InsertEndChild(TiXmlText("pipi"));
+	
+	const TiXmlNode* addr4NewNode = new TiXmlElement("addr");
+	newNode->InsertEndChild(*addr4NewNode)->InsertEndChild(TiXmlText("Shaanxi Xianyang"));
+
+	const TiXmlNode* tel4NewNode = new TiXmlElement("tel");
+	newNode->InsertEndChild(*tel4NewNode)->InsertEndChild(TiXmlText("02937310627"));
+	
+	const TiXmlNode* email4NewNode = new TiXmlElement("email");
+	newNode->InsertEndChild(*email4NewNode)->InsertEndChild(TiXmlText("pipi@home.com"));
+	
+	writeRoot->InsertEndChild(*newNode);
+
+	}
+#endif
+	doc.SaveFile();	//
+
+
+}

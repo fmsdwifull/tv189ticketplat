@@ -1,0 +1,20 @@
+<report>
+	<lastuploadtime>20140102233415</lastuploadtime><!--年月日时分秒-->
+	<lastprocesstime>20140102233915</lastprocesstime>
+	<nextuploadtime>20140102235423</nextuploadtime>
+
+
+	<mediaserver>
+		<ip></ip>
+		<status>0</status> <!--0:等待 1：正在上传-->
+	</mediaserver>
+	<mediaserver>
+		<ip></ip>
+		<status>0</status>
+	</mediaserver>
+	<logserver>
+		<ip></ip>
+		<status>0</status> <!--0：等待 1:工作中-->
+		<workqueue>0</workqueue>
+	</logserver>
+</report>

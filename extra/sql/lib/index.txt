@@ -1,0 +1,3 @@
+index.txt	- this file
+libsqlapi.so	- SQLAPI++ dynamic import library for GNU project C and C++ compiler (release)
+libsqlapi.a	- SQLAPI++ static library for GNU project C and C++ compiler (release)
